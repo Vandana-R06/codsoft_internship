@@ -1,712 +1,85 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nexus Studio — Digital Craft & Innovation</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Google Fonts: Playfair Display (display) + DM Sans (body) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <title>Advanced Scientific Calculator</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- ===== LOADING SCREEN ===== -->
-  <div id="loader" aria-hidden="true">
-    <div class="loader-inner">
-      <span class="loader-logo">NX</span>
-      <div class="loader-bar"><div class="loader-fill"></div></div>
-    </div>
+<div class="calculator">
+
+  <!-- Display -->
+  <div class="display">
+    <div id="history"></div>
+    <input type="text" id="result" placeholder="0" readonly>
   </div>
 
-  <!-- ===== BACK TO TOP BUTTON ===== -->
-  <button id="back-to-top" aria-label="Back to top" title="Back to top">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-  </button>
+  <!-- Buttons -->
+  <div class="buttons">
 
-  <!-- ===== NAVBAR ===== -->
-  <header id="navbar">
-    <nav class="nav-container">
-      <!-- Logo -->
-      <a href="#hero" class="nav-logo" aria-label="Nexus Studio Home">
-        <span class="logo-mark">NX</span>
-        <span class="logo-text">Nexus<em>Studio</em></span>
-      </a>
+    <!-- Row 1 -->
+    <button class="operator" onclick="clearAll()">AC</button>
+    <button onclick="clearEntry()">C</button>
+    <button onclick="backspace()">⌫</button>
+    <button class="operator" onclick="append('%')">%</button>
 
-      <!-- Desktop navigation links -->
-      <ul class="nav-links" id="nav-links" role="list">
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#services" class="nav-link">Services</a></li>
-        <li><a href="#projects" class="nav-link">Work</a></li>
-        <li><a href="#testimonials" class="nav-link">Clients</a></li>
-        <li><a href="#pricing" class="nav-link">Pricing</a></li>
-        <li><a href="#faq" class="nav-link">FAQ</a></li>
-        <li><a href="#contact" class="nav-link nav-cta">Get Started</a></li>
-      </ul>
+    <!-- Row 2 -->
+    <button onclick="append('7')">7</button>
+    <button onclick="append('8')">8</button>
+    <button onclick="append('9')">9</button>
+    <button class="operator" onclick="append('/')">÷</button>
 
-      <!-- Controls: Theme toggle + hamburger -->
-      <div class="nav-controls">
-        <button id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
-          <!-- Sun icon (shown in dark mode) -->
-          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-          </svg>
-          <!-- Moon icon (shown in light mode) -->
-          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          </svg>
-        </button>
-        <button id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
-          <span class="burger-line"></span>
-          <span class="burger-line"></span>
-          <span class="burger-line"></span>
-        </button>
-      </div>
-    </nav>
+    <!-- Row 3 -->
+    <button onclick="append('4')">4</button>
+    <button onclick="append('5')">5</button>
+    <button onclick="append('6')">6</button>
+    <button class="operator" onclick="append('*')">×</button>
 
-    <!-- Mobile nav overlay -->
-    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
-      <ul role="list">
-        <li><a href="#about" class="mobile-link">About</a></li>
-        <li><a href="#services" class="mobile-link">Services</a></li>
-        <li><a href="#projects" class="mobile-link">Work</a></li>
-        <li><a href="#testimonials" class="mobile-link">Clients</a></li>
-        <li><a href="#pricing" class="mobile-link">Pricing</a></li>
-        <li><a href="#faq" class="mobile-link">FAQ</a></li>
-        <li><a href="#contact" class="mobile-link mobile-cta">Get Started</a></li>
-      </ul>
-    </div>
-  </header>
+    <!-- Row 4 -->
+    <button onclick="append('1')">1</button>
+    <button onclick="append('2')">2</button>
+    <button onclick="append('3')">3</button>
+    <button class="operator" onclick="append('-')">−</button>
 
-  <!-- ===== MAIN CONTENT ===== -->
-  <main>
+    <!-- Row 5 -->
+    <button onclick="append('0')">0</button>
+    <button onclick="append('.')">.</button>
+    <button class="equal" onclick="calculate()">=</button>
+    <button class="operator" onclick="append('+')">+</button>
 
-    <!-- ===== HERO SECTION ===== -->
-    <section id="hero" aria-label="Hero">
-      <!-- Decorative grid background -->
-      <div class="hero-grid" aria-hidden="true"></div>
-      <!-- Decorative floating orbs -->
-      <div class="orb orb-1" aria-hidden="true"></div>
-      <div class="orb orb-2" aria-hidden="true"></div>
+    <!-- Scientific -->
+    <button onclick="square()">x²</button>
+    <button onclick="sqrt()">√</button>
+    <button onclick="power()">xʸ</button>
+    <button onclick="factorial()">!</button>
 
-      <div class="hero-content">
-        <!-- Tag line -->
-        <div class="hero-tag reveal-fade">
-          <span class="tag-dot"></span> Available for new projects in 2025
-        </div>
-        <!-- Main heading -->
-        <h1 class="hero-headline reveal-fade" style="--delay: 0.1s">
-          We craft<br />
-          <em>digital products</em><br />
-          that endure.
-        </h1>
-        <!-- Subtext -->
-        <p class="hero-sub reveal-fade" style="--delay: 0.2s">
-          Nexus Studio builds world-class software, interfaces, and experiences for startups and enterprises who refuse to settle for ordinary.
-        </p>
-        <!-- CTA group -->
-        <div class="hero-ctas reveal-fade" style="--delay: 0.3s">
-          <a href="#projects" class="btn btn-primary">View Our Work</a>
-          <a href="#contact" class="btn btn-ghost">Start a Project →</a>
-        </div>
-        <!-- Social proof strip -->
-        <div class="hero-proof reveal-fade" style="--delay: 0.4s">
-          <span>Trusted by</span>
-          <div class="proof-logos">
-            <span>Vercel</span><span>Stripe</span><span>Linear</span><span>Notion</span>
-          </div>
-        </div>
-      </div>
+    <button onclick="sin()">sin</button>
+    <button onclick="cos()">cos</button>
+    <button onclick="tan()">tan</button>
+    <button onclick="toggleMode()">DEG</button>
 
-      <!-- Floating code snippet card -->
-      <div class="hero-card reveal-slide" aria-hidden="true">
-        <div class="card-topbar">
-          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-          <span class="card-filename">nexus.config.js</span>
-        </div>
-        <pre class="card-code"><code><span class="c-keyword">export default</span> {
-  <span class="c-key">brand</span>: <span class="c-str">'Nexus Studio'</span>,
-  <span class="c-key">mission</span>: <span class="c-str">'craft excellence'</span>,
-  <span class="c-key">stack</span>: [<span class="c-str">'React'</span>, <span class="c-str">'Node'</span>, <span class="c-str">'Cloud'</span>],
-  <span class="c-key">since</span>: <span class="c-num">2018</span>,
-  <span class="c-key">clients</span>: <span class="c-num">120</span><span class="c-sym">+</span>,
-};</code></pre>
-      </div>
-    </section>
+    <button onclick="log()">log</button>
+    <button onclick="ln()">ln</button>
+    <button onclick="exp()">eˣ</button>
+    <button onclick="abs()">|x|</button>
 
-    <!-- ===== ABOUT SECTION ===== -->
-    <section id="about" aria-label="About us">
-      <div class="container">
-        <!-- Section label -->
-        <div class="section-label reveal-fade">01 — About</div>
+    <!-- Memory -->
+    <button onclick="memoryClear()">MC</button>
+    <button onclick="memoryRecall()">MR</button>
+    <button onclick="memoryAdd()">M+</button>
+    <button onclick="memorySubtract()">M-</button>
 
-        <div class="about-grid">
-          <!-- Left: Text content -->
-          <div class="about-text">
-            <h2 class="section-heading reveal-fade">
-              A studio built on<br /><em>precision & purpose.</em>
-            </h2>
-            <p class="reveal-fade" style="--delay: 0.1s">
-              Founded in 2018, Nexus Studio is a boutique software development studio with a singular obsession: quality. We partner with founders, product teams, and enterprises to create software that's not just functional — it's exceptional.
-            </p>
-            <p class="reveal-fade" style="--delay: 0.15s">
-              Our team of 18 engineers, designers, and strategists operates at the intersection of technical rigor and creative craft. We believe great software is an art form.
-            </p>
-            <div class="about-stats reveal-fade" style="--delay: 0.2s">
-              <div class="stat">
-                <span class="stat-number">120<em>+</em></span>
-                <span class="stat-label">Projects Shipped</span>
-              </div>
-              <div class="stat">
-                <span class="stat-number">6<em>yr</em></span>
-                <span class="stat-label">In Business</span>
-              </div>
-              <div class="stat">
-                <span class="stat-number">98<em>%</em></span>
-                <span class="stat-label">Client Retention</span>
-              </div>
-            </div>
-          </div>
+  </div>
 
-          <!-- Right: Decorative image + floating chips -->
-          <div class="about-visual reveal-slide">
-            <div class="about-img-wrap">
-              <div class="about-img-bg"></div>
-              <div class="about-img-inner">
-                <!-- Abstract SVG decoration -->
-                <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <circle cx="200" cy="200" r="180" stroke="var(--accent)" stroke-width="1" stroke-dasharray="8 6" opacity="0.3"/>
-                  <circle cx="200" cy="200" r="120" stroke="var(--accent)" stroke-width="1" opacity="0.2"/>
-                  <circle cx="200" cy="200" r="60" fill="var(--accent)" opacity="0.08"/>
-                  <text x="200" y="215" text-anchor="middle" font-family="'Playfair Display', serif" font-size="48" fill="var(--accent)" opacity="0.7">NX</text>
-                  <!-- Nodes -->
-                  <circle cx="200" cy="20" r="6" fill="var(--accent)"/>
-                  <circle cx="380" cy="200" r="6" fill="var(--accent)" opacity="0.5"/>
-                  <circle cx="200" cy="380" r="6" fill="var(--accent)" opacity="0.5"/>
-                  <circle cx="20" cy="200" r="6" fill="var(--accent)" opacity="0.5"/>
-                </svg>
-              </div>
-            </div>
-            <!-- Floating skill chips -->
-            <div class="chip chip-1">React / Next.js</div>
-            <div class="chip chip-2">Cloud Native</div>
-            <div class="chip chip-3">UI/UX Design</div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- History Panel -->
+  <div class="history-panel">
+    <h3>History</h3>
+    <ul id="historyList"></ul>
+  </div>
 
-    <!-- ===== SERVICES SECTION ===== -->
-    <section id="services" aria-label="Our services">
-      <div class="container">
-        <div class="section-label reveal-fade">02 — Services</div>
-        <div class="section-header reveal-fade">
-          <h2 class="section-heading">What we do<br /><em>exceptionally well.</em></h2>
-          <p class="section-sub">End-to-end expertise across the entire product lifecycle.</p>
-        </div>
+</div>
 
-        <div class="services-grid">
-          <!-- Service card 1 -->
-          <article class="service-card reveal-fade" style="--delay: 0s">
-            <div class="service-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            </div>
-            <h3>Software Engineering</h3>
-            <p>Scalable, maintainable codebases built with modern frameworks. From MVPs to enterprise-grade platforms.</p>
-            <div class="service-tags"><span>React</span><span>Node.js</span><span>TypeScript</span></div>
-          </article>
-
-          <!-- Service card 2 -->
-          <article class="service-card reveal-fade" style="--delay: 0.08s">
-            <div class="service-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
-            </div>
-            <h3>Product Design</h3>
-            <p>User-centred design systems, interactive prototypes, and interfaces that convert and delight.</p>
-            <div class="service-tags"><span>Figma</span><span>Design Systems</span><span>UX Research</span></div>
-          </article>
-
-          <!-- Service card 3 -->
-          <article class="service-card reveal-fade" style="--delay: 0.16s">
-            <div class="service-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <h3>Cloud & DevOps</h3>
-            <p>Infrastructure automation, CI/CD pipelines, and cloud architecture that scales without friction.</p>
-            <div class="service-tags"><span>AWS</span><span>Docker</span><span>Kubernetes</span></div>
-          </article>
-
-          <!-- Service card 4 -->
-          <article class="service-card reveal-fade" style="--delay: 0.24s">
-            <div class="service-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-            </div>
-            <h3>Mobile Development</h3>
-            <p>Native-feel cross-platform apps for iOS and Android with buttery-smooth performance.</p>
-            <div class="service-tags"><span>React Native</span><span>Flutter</span><span>Swift</span></div>
-          </article>
-
-          <!-- Service card 5 -->
-          <article class="service-card reveal-fade" style="--delay: 0.32s">
-            <div class="service-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            </div>
-            <h3>Data & Analytics</h3>
-            <p>Turn raw data into strategic insight with dashboards, pipelines, and ML-powered features.</p>
-            <div class="service-tags"><span>Python</span><span>PostgreSQL</span><span>BigQuery</span></div>
-          </article>
-
-          <!-- Service card 6 -->
-          <article class="service-card reveal-fade" style="--delay: 0.40s">
-            <div class="service-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h3>Security & QA</h3>
-            <p>Penetration testing, automated QA suites, and compliance reviews to ship with confidence.</p>
-            <div class="service-tags"><span>OWASP</span><span>Cypress</span><span>SOC 2</span></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== PROJECTS SECTION ===== -->
-    <section id="projects" aria-label="Portfolio projects">
-      <div class="container">
-        <div class="section-label reveal-fade">03 — Work</div>
-        <div class="section-header reveal-fade">
-          <h2 class="section-heading">Selected<br /><em>projects.</em></h2>
-          <p class="section-sub">A curated look at work we're proud of.</p>
-        </div>
-
-        <div class="projects-grid">
-          <!-- Project 1 (large) -->
-          <article class="project-card project-large reveal-fade">
-            <div class="project-img project-img-1">
-              <div class="project-overlay">
-                <span class="project-tag">SaaS Platform</span>
-                <h3>Orion Analytics</h3>
-                <p>Real-time data platform processing 2M+ events/day for a Series B fintech startup.</p>
-                <a href="#" class="project-link" aria-label="View Orion Analytics project">View Case Study →</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 2 -->
-          <article class="project-card reveal-fade" style="--delay: 0.1s">
-            <div class="project-img project-img-2">
-              <div class="project-overlay">
-                <span class="project-tag">Mobile App</span>
-                <h3>Bloom Health</h3>
-                <p>Mental wellness app with 50k+ active users across iOS & Android.</p>
-                <a href="#" class="project-link" aria-label="View Bloom Health project">View Case Study →</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 3 -->
-          <article class="project-card reveal-fade" style="--delay: 0.15s">
-            <div class="project-img project-img-3">
-              <div class="project-overlay">
-                <span class="project-tag">E-Commerce</span>
-                <h3>Craft Market</h3>
-                <p>Headless commerce platform with $4M+ in annual GMV for an artisan marketplace.</p>
-                <a href="#" class="project-link" aria-label="View Craft Market project">View Case Study →</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 4 (large) -->
-          <article class="project-card project-large reveal-fade" style="--delay: 0.2s">
-            <div class="project-img project-img-4">
-              <div class="project-overlay">
-                <span class="project-tag">Enterprise</span>
-                <h3>Atlas ERP</h3>
-                <p>End-to-end enterprise resource planning suite serving 12 Fortune 500 companies.</p>
-                <a href="#" class="project-link" aria-label="View Atlas ERP project">View Case Study →</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== TESTIMONIALS SECTION ===== -->
-    <section id="testimonials" aria-label="Client testimonials">
-      <div class="container">
-        <div class="section-label reveal-fade">04 — Clients</div>
-        <div class="section-header reveal-fade">
-          <h2 class="section-heading">Trusted by<br /><em>builders & leaders.</em></h2>
-        </div>
-
-        <!-- Slider wrapper -->
-        <div class="testimonial-slider reveal-fade" role="region" aria-label="Testimonials carousel">
-          <div class="slider-track" id="slider-track">
-
-            <!-- Testimonial 1 -->
-            <div class="testimonial-slide" role="group" aria-label="Testimonial 1 of 4">
-              <div class="quote-mark" aria-hidden="true">"</div>
-              <blockquote>
-                Nexus Studio delivered our entire platform in 14 weeks — ahead of schedule and under budget. The code quality was the best I've seen in 15 years of hiring dev shops.
-              </blockquote>
-              <div class="testimonial-author">
-                <div class="author-avatar">SK</div>
-                <div>
-                  <strong>Sarah Kim</strong>
-                  <span>CEO, Orion Analytics</span>
-                </div>
-              </div>
-              <div class="star-rating" aria-label="5 out of 5 stars">★★★★★</div>
-            </div>
-
-            <!-- Testimonial 2 -->
-            <div class="testimonial-slide" role="group" aria-label="Testimonial 2 of 4">
-              <div class="quote-mark" aria-hidden="true">"</div>
-              <blockquote>
-                They don't just write code — they think about the product. Their suggestions doubled our user engagement metric in the first month post-launch.
-              </blockquote>
-              <div class="testimonial-author">
-                <div class="author-avatar">MR</div>
-                <div>
-                  <strong>Marcus Reid</strong>
-                  <span>Head of Product, Bloom Health</span>
-                </div>
-              </div>
-              <div class="star-rating" aria-label="5 out of 5 stars">★★★★★</div>
-            </div>
-
-            <!-- Testimonial 3 -->
-            <div class="testimonial-slide" role="group" aria-label="Testimonial 3 of 4">
-              <div class="quote-mark" aria-hidden="true">"</div>
-              <blockquote>
-                The design system they built us has scaled flawlessly across 6 product lines. Working with Nexus Studio felt like having a co-founder who only sleeps four hours a night.
-              </blockquote>
-              <div class="testimonial-author">
-                <div class="author-avatar">AP</div>
-                <div>
-                  <strong>Ananya Patel</strong>
-                  <span>CTO, Craft Market</span>
-                </div>
-              </div>
-              <div class="star-rating" aria-label="5 out of 5 stars">★★★★★</div>
-            </div>
-
-            <!-- Testimonial 4 -->
-            <div class="testimonial-slide" role="group" aria-label="Testimonial 4 of 4">
-              <div class="quote-mark" aria-hidden="true">"</div>
-              <blockquote>
-                Our legacy ERP was a mess. Nexus Studio modernised the entire stack in phases without a single day of downtime. Absolutely remarkable execution.
-              </blockquote>
-              <div class="testimonial-author">
-                <div class="author-avatar">TL</div>
-                <div>
-                  <strong>Thomas Lane</strong>
-                  <span>VP Engineering, Atlas Corp</span>
-                </div>
-              </div>
-              <div class="star-rating" aria-label="5 out of 5 stars">★★★★★</div>
-            </div>
-
-          </div><!-- /slider-track -->
-
-          <!-- Slider controls -->
-          <div class="slider-controls">
-            <button class="slider-btn" id="slider-prev" aria-label="Previous testimonial">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            <div class="slider-dots" id="slider-dots" role="tablist" aria-label="Testimonial navigation"></div>
-            <button class="slider-btn" id="slider-next" aria-label="Next testimonial">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== PRICING SECTION ===== -->
-    <section id="pricing" aria-label="Pricing plans">
-      <div class="container">
-        <div class="section-label reveal-fade">05 — Pricing</div>
-        <div class="section-header reveal-fade">
-          <h2 class="section-heading">Transparent<br /><em>pricing.</em></h2>
-          <p class="section-sub">No surprises. No lock-in. Choose what fits your stage.</p>
-        </div>
-
-        <div class="pricing-grid">
-          <!-- Plan: Starter -->
-          <article class="pricing-card reveal-fade" style="--delay: 0s">
-            <div class="plan-name">Starter</div>
-            <div class="plan-price"><span class="price-currency">$</span>4,800<span class="price-per">/mo</span></div>
-            <p class="plan-desc">Perfect for early-stage startups who need a solid technical foundation.</p>
-            <ul class="plan-features" role="list">
-              <li><span class="check">✓</span> Up to 2 engineers</li>
-              <li><span class="check">✓</span> 80 hours/month</li>
-              <li><span class="check">✓</span> Weekly check-ins</li>
-              <li><span class="check">✓</span> Code reviews</li>
-              <li><span class="check">✓</span> Basic QA</li>
-              <li class="disabled"><span>✗</span> Design system</li>
-              <li class="disabled"><span>✗</span> DevOps setup</li>
-            </ul>
-            <a href="#contact" class="btn btn-ghost plan-btn">Get Started</a>
-          </article>
-
-          <!-- Plan: Growth (featured) -->
-          <article class="pricing-card pricing-featured reveal-fade" style="--delay: 0.1s">
-            <div class="featured-badge">Most Popular</div>
-            <div class="plan-name">Growth</div>
-            <div class="plan-price"><span class="price-currency">$</span>9,600<span class="price-per">/mo</span></div>
-            <p class="plan-desc">For growing teams ready to ship faster and build for scale.</p>
-            <ul class="plan-features" role="list">
-              <li><span class="check">✓</span> Up to 4 engineers</li>
-              <li><span class="check">✓</span> 180 hours/month</li>
-              <li><span class="check">✓</span> Daily standups</li>
-              <li><span class="check">✓</span> Full code ownership</li>
-              <li><span class="check">✓</span> Design system</li>
-              <li><span class="check">✓</span> DevOps setup</li>
-              <li class="disabled"><span>✗</span> Dedicated PM</li>
-            </ul>
-            <a href="#contact" class="btn btn-primary plan-btn">Get Started</a>
-          </article>
-
-          <!-- Plan: Enterprise -->
-          <article class="pricing-card reveal-fade" style="--delay: 0.2s">
-            <div class="plan-name">Enterprise</div>
-            <div class="plan-price plan-custom">Custom</div>
-            <p class="plan-desc">Full-team embed for companies with complex, high-stakes product needs.</p>
-            <ul class="plan-features" role="list">
-              <li><span class="check">✓</span> Dedicated team</li>
-              <li><span class="check">✓</span> Unlimited hours</li>
-              <li><span class="check">✓</span> Dedicated PM</li>
-              <li><span class="check">✓</span> SLA guarantee</li>
-              <li><span class="check">✓</span> Security audits</li>
-              <li><span class="check">✓</span> On-site visits</li>
-              <li><span class="check">✓</span> Board reporting</li>
-            </ul>
-            <a href="#contact" class="btn btn-ghost plan-btn">Contact Sales</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== FAQ SECTION ===== -->
-    <section id="faq" aria-label="Frequently asked questions">
-      <div class="container">
-        <div class="section-label reveal-fade">06 — FAQ</div>
-        <div class="section-header reveal-fade">
-          <h2 class="section-heading">Common<br /><em>questions.</em></h2>
-        </div>
-
-        <div class="faq-list reveal-fade">
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              How does the engagement typically work?
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer">
-              <p>We start with a discovery call to understand your goals, then move into a scoping phase where we define milestones, timelines, and deliverables. Most engagements begin within 2–3 weeks of signing.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Do you work with early-stage startups?
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer">
-              <p>Absolutely. Some of our best work has been for pre-seed startups who needed to move fast. Our Starter plan is specifically designed for early-stage teams with budget constraints.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Who owns the code and intellectual property?
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer">
-              <p>You do — always. All code, assets, and deliverables are fully transferred to you upon completion. We retain no licensing rights or access unless specifically agreed.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              What tech stacks do you specialise in?
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer">
-              <p>Our primary stack is React/Next.js on the frontend, Node.js or Python on the backend, and AWS or GCP for infrastructure. We also work with Ruby on Rails, Go, and Flutter for mobile.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              How do you handle communication and transparency?
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer">
-              <p>We use Slack for daily communication, Linear for project tracking, and hold weekly or bi-weekly video check-ins. You always have full visibility into what we're working on.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Can you take over an existing codebase?
-              <span class="faq-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="faq-answer">
-              <p>Yes, this is a common request. We conduct a thorough code audit first — usually 1–2 weeks — then develop a modernisation roadmap before touching a line of production code.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== CONTACT SECTION ===== -->
-    <section id="contact" aria-label="Contact us">
-      <div class="container">
-        <div class="section-label reveal-fade">07 — Contact</div>
-
-        <div class="contact-grid">
-          <!-- Left: Copy -->
-          <div class="contact-info reveal-fade">
-            <h2 class="section-heading">Let's build<br /><em>something great.</em></h2>
-            <p>Tell us about your project. We'll get back to you within one business day.</p>
-            <div class="contact-details">
-              <div class="contact-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                <span>hello@nexusstudio.dev</span>
-              </div>
-              <div class="contact-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 19"/></svg>
-                <span>+1 (415) 555-0192</span>
-              </div>
-              <div class="contact-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>San Francisco, CA</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right: Form -->
-          <div class="contact-form-wrap reveal-slide">
-            <form id="contact-form" class="contact-form" novalidate aria-label="Contact form">
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="name">Full Name</label>
-                  <input type="text" id="name" name="name" placeholder="Jane Doe" autocomplete="name" />
-                  <span class="form-error" id="name-error" role="alert"></span>
-                </div>
-                <div class="form-group">
-                  <label for="email">Email Address</label>
-                  <input type="email" id="email" name="email" placeholder="jane@company.com" autocomplete="email" />
-                  <span class="form-error" id="email-error" role="alert"></span>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="subject">Subject</label>
-                <input type="text" id="subject" name="subject" placeholder="New project / General inquiry" />
-                <span class="form-error" id="subject-error" role="alert"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="5" placeholder="Tell us about your project, timeline, and budget…"></textarea>
-                <span class="form-error" id="message-error" role="alert"></span>
-              </div>
-
-              <button type="submit" class="btn btn-primary form-submit">
-                <span class="btn-text">Send Message</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              </button>
-
-              <!-- Success message -->
-              <div class="form-success" id="form-success" role="status" aria-live="polite">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Message sent! We'll be in touch within 24 hours.</span>
-              </div>
-
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ===== FOOTER ===== -->
-  <footer id="footer">
-    <div class="container">
-      <div class="footer-top">
-        <!-- Brand column -->
-        <div class="footer-brand">
-          <a href="#hero" class="nav-logo footer-logo" aria-label="Nexus Studio Home">
-            <span class="logo-mark">NX</span>
-            <span class="logo-text">Nexus<em>Studio</em></span>
-          </a>
-          <p>Crafting exceptional digital products since 2018. Based in San Francisco, working globally.</p>
-          <!-- Social links -->
-          <div class="social-links">
-            <a href="#" aria-label="GitHub" title="GitHub">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            </a>
-            <a href="#" aria-label="LinkedIn" title="LinkedIn">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
-            <a href="#" aria-label="Twitter/X" title="Twitter">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
-            </a>
-            <a href="#" aria-label="Dribbble" title="Dribbble">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Quick links -->
-        <div class="footer-col">
-          <h4>Company</h4>
-          <ul role="list">
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#projects">Work</a></li>
-            <li><a href="#contact">Careers</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>Services</h4>
-          <ul role="list">
-            <li><a href="#services">Engineering</a></li>
-            <li><a href="#services">Design</a></li>
-            <li><a href="#services">Cloud & DevOps</a></li>
-            <li><a href="#services">Mobile</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>Resources</h4>
-          <ul role="list">
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Case Studies</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Footer bottom bar -->
-      <div class="footer-bottom">
-        <p>© 2025 Nexus Studio. All rights reserved.</p>
-        <div class="footer-legal">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
